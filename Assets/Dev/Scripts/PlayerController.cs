@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _playerSpeed;
 
+    private void Awake()
+    {
+        gemStackSystem = GetComponent<StackSystem>();
+    }
     private void FixedUpdate()// Character Positions and Rotations Controller With Joystick
     {
 
@@ -23,6 +27,17 @@ public class PlayerController : MonoBehaviour
         }
         else _Anim.SetBool("walking", false);
 
+    }
+
+    private StackSystem gemStackSystem;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject gem = other.GetComponent<GameObject>();
+        if (gem != null)
+        {
+            gemStackSystem.AddGem(gem.gameObject);
+        }
     }
 }
 
