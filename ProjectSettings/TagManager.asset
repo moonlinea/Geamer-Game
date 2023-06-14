@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Gam
+  - Target
+  - Gem_Pink
+  - Gem_Yellow
+  - Gem_Green
   layers:
   - Default
   - TransparentFX
@@ -11,10 +16,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Gam
+  - GreenGam
+  - YellowGam
+  - PinkGam
   - 
   - 
   - 

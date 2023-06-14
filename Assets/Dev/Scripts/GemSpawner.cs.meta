@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: ba213c92593880945a45a1ce2c6d292e
+guid: 28d73590dd7ad604a92cb9c37e99895c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - hedefTransform: {fileID: 1965460130750571790, guid: 243fe2d24885f7f4799c857516aca4b1,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        gemStackSystem = GetComponent<StackSystem>();
+       
     }
     private void FixedUpdate()// Character Positions and Rotations Controller With Joystick
     {
@@ -29,16 +29,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private StackSystem gemStackSystem;
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider GamCol)
     {
-        GameObject gem = other.GetComponent<GameObject>();
-        if (gem != null)
+        if (GamCol.tag == "Gem_Pink" && GamCol.tag == "Gem_Green"&& GamCol.tag == "Gem_Yellow")
         {
-            gemStackSystem.AddGem(gem.gameObject);
+            Debug.Log("gam toplandý"+GamCol.tag);
         }
     }
+
+
+
+
 }
 
     //---------------------------------------------------------------------------------------- other Joystick
