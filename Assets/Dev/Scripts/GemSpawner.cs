@@ -4,23 +4,41 @@ using UnityEngine;
 public class GemSpawner : MonoBehaviour
 {
     public GemTypeManager gemTypeManager;
-    public Transform spawnArea;
+    public Transform[] spawnArea;
     public int gemCount;
 
     private void Start()
     {
+        
+        if (gemCount > spawnArea.Length)
+        {
+            Debug.LogError("Gem count cannot be greater than the number of spawn areas.");
+            return;
+        }
+
         SpawnGems();
+        Debug.Log("Gem Count: " + gemCount);
     }
 
     private void SpawnGems()
     {
+        List<int> availableIndices = new List<int>();
+
+        for (int i = 0; i < spawnArea.Length; i++)
+        {
+            availableIndices.Add(i);
+        }
+
         for (int i = 0; i < gemCount; i++)
         {
             GemType randomGemType = GetRandomGemType();
-            Vector3 spawnPosition = GetRandomSpawnPosition();
+            int randomIndex = GetRandomSpawnIndex(availableIndices);
+            Transform spawnTransform = spawnArea[randomIndex];
 
-            GameObject gemObject = Instantiate(randomGemType.model, spawnPosition, Quaternion.identity);
+            GameObject gemObject = Instantiate(randomGemType.model, spawnTransform.position, Quaternion.identity);
             gemObject.tag = randomGemType.gemName;
+
+            availableIndices.Remove(randomIndex);
         }
     }
 
@@ -30,11 +48,9 @@ public class GemSpawner : MonoBehaviour
         return gemTypeManager.gemTypes[randomIndex];
     }
 
-    private Vector3 GetRandomSpawnPosition()
+    private int GetRandomSpawnIndex(List<int> availableIndices)
     {
-        Vector3 randomPosition = new Vector3(Random.Range(spawnArea.position.x - spawnArea.localScale.x , spawnArea.position.x + spawnArea.localScale.x ),
-                                             spawnArea.position.y,
-                                             Random.Range(spawnArea.position.z - spawnArea.localScale.z , spawnArea.position.z + spawnArea.localScale.z ));
-        return randomPosition;
+        int randomIndex = Random.Range(0, availableIndices.Count);
+        return availableIndices[randomIndex];
     }
 }

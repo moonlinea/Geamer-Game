@@ -8,6 +8,9 @@ public class StackSystem : MonoBehaviour
     private Transform gemTransform;
     private Vector3 _offset;
     private Transform gemPos;
+    private static int a=0;
+
+    bool b = false;
 
     public void Start()
     {
@@ -18,24 +21,34 @@ public class StackSystem : MonoBehaviour
         targetObjects = GameObject.FindWithTag("Target");
 
         gemPos = targetObjects.transform;
+        if (b == true)
+        {
+            Follow();
+        }
 
     }
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
            
             Debug.Log("Stack");
-            Follow();
-           
+            b = true;
+            a++;
+            Debug.Log(a + "kadar gem toplandý");
+
         }
     }
     private void Follow()
     {
-        
         gemTransform.DOMoveX(gemPos.position.x + _offset.x, 5 * Time.deltaTime);
         gemTransform.DOMoveZ(gemPos.position.z + _offset.z, 5 * Time.deltaTime);
-        gemTransform.DOMoveY(gemPos.position.y+_offset.y,5*Time.deltaTime);
+        gemTransform.DOMoveY(gemPos.position.y + _offset.y, 5 * Time.deltaTime);
+
+    }
+    public void TotalGem()
+    {
+       
     }
 
 }
