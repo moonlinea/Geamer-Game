@@ -9,6 +9,7 @@ TagManager:
   - Gem_Pink
   - Gem_Yellow
   - Gem_Green
+  - Jeweler
   layers:
   - Default
   - TransparentFX

@@ -10,11 +10,25 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _Anim;
 
     [SerializeField] private float _playerSpeed;
+    private GemTypeManager GTM;
+    private Dictionary<string, int> gemCounts; // Sayaçlarý tutmak için sözlük
 
-    private void Awake()
+    private void Start()
     {
-       
+        GTM = FindObjectOfType<GemTypeManager>();
+        InitializeGemCounts();
+
     }
+    private void InitializeGemCounts()
+    {
+        gemCounts = new Dictionary<string, int>();
+
+        foreach (GemType gemType in GTM.gemTypes)
+        {
+            gemCounts.Add(gemType.gemName, 0); // Her bir gem türü için baþlangýçta 0 sayacý ayarla
+        }
+    }
+
     private void FixedUpdate()// Character Positions and Rotations Controller With Joystick
     {
 
@@ -28,56 +42,42 @@ public class PlayerController : MonoBehaviour
         else _Anim.SetBool("walking", false);
 
     }
-
     private void OnTriggerEnter(Collider GamCol)
     {
-        if (GamCol.tag == "Gem_Pink" && GamCol.tag == "Gem_Green"&& GamCol.tag == "Gem_Yellow")
+        if (GamCol.tag.StartsWith("Gem_"))
         {
-            Debug.Log("gam toplandý"+GamCol.tag);
+            string gemTag = GamCol.tag; // Gem'in etiketi
+
+            if (gemCounts.ContainsKey(gemTag))
+            {
+                gemCounts[gemTag]++; // Ýlgili sayacý bir artýr
+                Debug.Log("Gem Count for " + gemTag + ": " + gemCounts[gemTag]);
+            }
         }
     }
+
+    //private void OnTriggerEnter(Collider GamCol)
+    //{
+    //    if (GamCol.tag.StartsWith("Gem_"))
+    //    {
+    //        foreach (GemType gemType in GTM.gemTypes)
+    //        {
+    //            if (GamCol.CompareTag(gemType.gemName))
+    //            {
+    //                float startingPrice = gemType.startingPrice;
+    //                Debug.Log("Gem Name: " + gemType.gemName);
+    //                Debug.Log("Starting Price: " + startingPrice);
+    //                break;
+    //            }
+    //        }
+
+    //    }
+    //}
 
 
 
 
 }
 
-    //---------------------------------------------------------------------------------------- other Joystick
-    //private Rigidbody _rigidbody;
-    //private Vector3 _moveVector;
-    //[SerializeField] private FloatingJoystick _joystick;
-
-
-
-    //[SerializeField] private Animator _Anim;
-
-    //[SerializeField] private float _playerMoveSpeed;
-    //[SerializeField] private float _playerRotateSpeed;
-
-    //private void Awake()
-    //{
-    //    _rigidbody = GetComponent<Rigidbody>();
-    //}
-    //private void Update()
-    //{
-    //    Move();
-    //}
-    //private void Move()
-    //{
-    //    _moveVector = Vector3.zero;
-    //    _moveVector.x = _joystick.Horizontal * _playerMoveSpeed * Time.deltaTime;
-    //    _moveVector.z = _joystick.Vertical * _playerMoveSpeed * Time.deltaTime;
-
-    //    if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
-    //    {
-    //        Vector3 direction = Vector3.RotateTowards(transform.forward, _moveVector, _playerRotateSpeed * Time.deltaTime, 0.0f);
-    //        _Anim.SetBool("walking", true);
-    //    }
-    //    else if(_joystick.Horizontal == 0 || _joystick.Vertical == 0)
-    //    {
-    //        _Anim.SetBool("walking", false);
-    //    }
-    //    _rigidbody.MovePosition(_rigidbody.position + _moveVector);
-    //}
 
 

@@ -8,18 +8,20 @@ public class StackSystem : MonoBehaviour
     private Transform gemTransform;
     private Vector3 _offset;
     private Transform gemPos;
-    private static int a=0;
+   
 
     bool b = false;
 
     public void Start()
     {
         gemTransform = this.transform;
+        targetObjects = GameObject.FindWithTag("Target");
+
     }
     public void Update()
     {
-        targetObjects = GameObject.FindWithTag("Target");
 
+       
         gemPos = targetObjects.transform;
         if (b == true)
         {
@@ -30,13 +32,16 @@ public class StackSystem : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
+
+        {
+            b = true;
+           
+
+        }
+        else if (other.CompareTag("Jeweler"))
         {
            
-            Debug.Log("Stack");
-            b = true;
-            a++;
-            Debug.Log(a + "kadar gem toplandý");
-
+            targetObjects = GameObject.FindWithTag("Jeweler");
         }
     }
     private void Follow()
@@ -46,46 +51,6 @@ public class StackSystem : MonoBehaviour
         gemTransform.DOMoveY(gemPos.position.y + _offset.y, 5 * Time.deltaTime);
 
     }
-    public void TotalGem()
-    {
-       
-    }
+ 
 
 }
-//public class StackSystem : MonoBehaviour
-//{
-//    private GameObject targetObjects; // Target objesini Inspector üzerinden atayýn
-//    public float stackHeight = 1f; // Stack yüksekliði
-//    private Transform gemTransform;
-//    private Vector3 _offset;
-//    private Transform gemPos;
-
-//    public void Start()
-//    {
-//        gemTransform = this.transform;
-//        _offset = new Vector3(0f, stackHeight, 0f);
-//    }
-
-//    public void Update()
-//    {
-//        targetObjects = GameObject.FindWithTag("Target");
-//        gemPos = targetObjects.transform;
-//    }
-
-//    private void OnTriggerStay(Collider other)
-//    {
-//        if (other.CompareTag("Player"))
-//        {
-//            Debug.Log("Stack");
-//            Follow();
-//            gemTransform.position += _offset;
-//        }
-//    }
-
-//    private void Follow()
-//    {
-//        gemTransform.DOMoveX(gemPos.position.x + _offset.x, 5 * Time.deltaTime);
-//        gemTransform.DOMoveZ(gemPos.position.z + _offset.z, 5 * Time.deltaTime);
-//    }
-//}
-
