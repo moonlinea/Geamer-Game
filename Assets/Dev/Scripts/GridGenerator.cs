@@ -2,54 +2,34 @@ using UnityEngine;
 
 public class GridGenerator : MonoBehaviour
 {
-    public int width; // Grid geniþliði
-    public int height; // Grid yüksekliði
-    public float cellSize; // Hücre boyutu
-    public Vector3 originPosition=new Vector3(-6.03f,0f,0f); // Baþlangýç pozisyonu
+    public int rowCount;
+    public int columnCount;
+    public GameObject tilePrefab;
 
-    private GameObject[,] grid; // Grid hücrelerini tutan 2D dizi
+    public Transform[] spawnArea; // Dizi tanýmlanýyor
 
     private void Start()
     {
-        CreateGrid();
+        GenerateGrid();
     }
 
-    private void CreateGrid()
+    private void GenerateGrid()
     {
-        grid = new GameObject[width, height];
+        Vector3 currentPosition = transform.position;
 
-        for (int x = 0; x < width; x++)
+        Vector3 cellSize = tilePrefab.GetComponent<Renderer>().bounds.size;
+
+        spawnArea = new Transform[rowCount * columnCount]; // Dizi boyutu rowCount * columnCount olarak ayarlanýyor
+
+        for (int row = 0; row < rowCount; row++)
         {
-            for (int y = 0; y < height; y++)
+            for (int column = 0; column < columnCount; column++)
             {
-                Vector3 spawnPosition = GetCellPosition(x, y);
-                GameObject cellObject = new GameObject("Cell (" + x + ", " + y + ")");
-                cellObject.transform.position = spawnPosition;
-                grid[x, y] = cellObject;
-            }
-        }
-    }
+                Vector3 position = currentPosition + new Vector3(column * cellSize.x, 0, row * cellSize.z);
+                GameObject tile = Instantiate(tilePrefab, position, Quaternion.identity, transform);
+                tile.name = $"Tile ({row}, {column})";
 
-    private Vector3 GetCellPosition(int x, int y)
-    {
-        Vector3 positionOffset = new Vector3(cellSize * 0.5f, 0f, cellSize * 0.5f);
-        Vector3 spawnPosition = originPosition + new Vector3(x * cellSize, 0f, y * cellSize) + positionOffset;
-        return spawnPosition;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-
-        if (grid != null)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    Vector3 cellPosition = GetCellPosition(x, y);
-                    Gizmos.DrawWireCube(cellPosition, new Vector3(cellSize, 0f, cellSize));
-                }
+                spawnArea[row * columnCount + column] = tile.transform; // Transform bilgisi spawnArea dizisine ekleniyor
             }
         }
     }
