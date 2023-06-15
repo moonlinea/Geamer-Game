@@ -25,6 +25,8 @@ public class GemSpawner : MonoBehaviour
 
             SpawnGems();
             Debug.Log("Gem Count: " + gemCount);
+
+            StartRespawnGems(); // Yeniden spawnlama iþlemini baþlat
         }
         else
         {
@@ -72,7 +74,7 @@ public class GemSpawner : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.CompareTag("Gem")) // Eðer Gem etiketine sahip bir obje varsa, grid boþ deðildir
+            if (collider.tag.StartsWith("Gem_")) // Eðer Gem etiketine sahip bir obje varsa, grid boþ deðildir
                 return false;
         }
 
@@ -93,14 +95,15 @@ public class GemSpawner : MonoBehaviour
             }
         }
 
-        StartCoroutine(RespawnGemsCoroutine()); // Yeniden spawnlama iþlemini tekrar baþlat
+        StartCoroutine(RespawnGemsCoroutine()); // Yeniden spawnlama iþlemini tekrarla
     }
 
-    public void StartRespawnGems()
+    private void StartRespawnGems()
     {
-        StartCoroutine(RespawnGemsCoroutine());
+        StartCoroutine(RespawnGemsCoroutine()); // Yeniden spawnlama coroutine'ini baþlat
     }
 }
+
 
 
 //using System.Collections.Generic;
