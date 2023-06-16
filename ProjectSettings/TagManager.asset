@@ -10,6 +10,7 @@ TagManager:
   - Gem_Yellow
   - Gem_Green
   - Jeweler
+  - Sales
   layers:
   - Default
   - TransparentFX

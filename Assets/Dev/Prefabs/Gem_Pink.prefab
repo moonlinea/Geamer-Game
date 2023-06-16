@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8081895689475825467}
   - component: {fileID: 4615569113027573618}
   - component: {fileID: 4615569113027573617}
+  - component: {fileID: 9218280067086574126}
   m_Layer: 9
   m_Name: Gem_Pink
   m_TagString: Gem_Pink
@@ -128,3 +129,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &9218280067086574126
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9000937118183891564}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d265965c9f1a02441887945e68bd1932, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

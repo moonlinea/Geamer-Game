@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8512034567232208837}
   - component: {fileID: 5045633292712990606}
   - component: {fileID: 5045633292712990607}
+  - component: {fileID: 7901855515862385627}
   m_Layer: 7
   m_Name: Gem_Green
   m_TagString: Gem_Green
@@ -128,3 +129,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &7901855515862385627
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854564530675876502}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 73ee7c3fa8cb7054597180410d91a28e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

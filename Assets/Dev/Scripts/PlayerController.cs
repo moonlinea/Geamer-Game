@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _playerSpeed;
     private GemTypeManager GTM;
-    private Dictionary<string, int> gemCounts; // Sayaçlarý tutmak için sözlük
+    private static Dictionary<string, int> gemCounts; // Sayaçlarý tutmak için sözlük
 
     private void Start()
     {
@@ -57,25 +57,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider GamCol)
-    //{
-    //    if (GamCol.tag.StartsWith("Gem_"))
-    //    {
-    //        foreach (GemType gemType in GTM.gemTypes)
-    //        {
-    //            if (GamCol.CompareTag(gemType.gemName))
-    //            {
-    //                float startingPrice = gemType.startingPrice;
-    //                Debug.Log("Gem Name: " + gemType.gemName);
-    //                Debug.Log("Starting Price: " + startingPrice);
-    //                break;
-    //            }
-    //        }
+    public static int GetGemCount(string gemTag)
+    {
+        if (gemCounts.ContainsKey(gemTag))
+        {
+            return gemCounts[gemTag];
+        }
 
-    //    }
-    //}
-
-
+        return 0; // Eðer belirtilen gemTag'e sahip bir sayaç yoksa 0 deðerini döndür
+    }
 
 
 }

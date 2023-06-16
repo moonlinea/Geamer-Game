@@ -1,5 +1,4 @@
 using UnityEngine;
-using DG.Tweening;
 
 public class StackSystem : MonoBehaviour
 {
@@ -8,7 +7,6 @@ public class StackSystem : MonoBehaviour
     private Transform gemTransform;
     private Vector3 _offset;
     private Transform gemPos;
-   
 
     bool b = false;
 
@@ -16,41 +14,35 @@ public class StackSystem : MonoBehaviour
     {
         gemTransform = this.transform;
         targetObjects = GameObject.FindWithTag("Target");
-
     }
+
     public void Update()
     {
-
-       
         gemPos = targetObjects.transform;
         if (b == true)
         {
             Follow();
         }
-
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-
         {
             b = true;
-           
-
         }
-        else if (other.CompareTag("Jeweler"))
+        else if (other.CompareTag("Sales"))
         {
-           
             targetObjects = GameObject.FindWithTag("Jeweler");
         }
     }
+
     private void Follow()
     {
-        gemTransform.DOMoveX(gemPos.position.x + _offset.x, 5 * Time.deltaTime);
-        gemTransform.DOMoveZ(gemPos.position.z + _offset.z, 5 * Time.deltaTime);
-        gemTransform.DOMoveY(gemPos.position.y + _offset.y, 5 * Time.deltaTime);
+        float speed = 5f;
+        float step = speed * Time.deltaTime;
 
+        Vector3 targetPosition = gemPos.position + _offset;
+        gemTransform.position = Vector3.MoveTowards(gemTransform.position, targetPosition, step);
     }
- 
-
 }
