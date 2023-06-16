@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         GTM = FindObjectOfType<GemTypeManager>();
         InitializeGemCounts();
+       
 
     }
     private void InitializeGemCounts()
@@ -47,7 +48,7 @@ public class PlayerController : MonoBehaviour
         if (GamCol.tag.StartsWith("Gem_"))
         {
             string gemTag = GamCol.tag; // Gem'in etiketi
-
+           
             if (gemCounts.ContainsKey(gemTag))
             {
                 gemCounts[gemTag]++; // Ýlgili sayacý bir artýr
