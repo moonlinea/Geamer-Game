@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float _playerSpeed;
     private GemTypeManager GTM;
+
     private static Dictionary<string, int> gemCounts; // Sayaçlarý tutmak için sözlük
+
+    public static GoldCounter TotalGold;
 
     private void Start()
     {
         GTM = FindObjectOfType<GemTypeManager>();
         InitializeGemCounts();
-       
+        LoadGemCounts();
 
     }
     private void InitializeGemCounts()
@@ -26,7 +29,9 @@ public class PlayerController : MonoBehaviour
 
         foreach (GemType gemType in GTM.gemTypes)
         {
-            gemCounts.Add(gemType.gemName, 0); // Her bir gem türü için baþlangýçta 0 sayacý ayarla
+            string gemName = gemType.gemName;
+            int count = PlayerPrefs.GetInt(gemName, 0); // Gem sayacýný PlayerPrefs'ten yükle, yoksa 0 olarak ayarla
+            gemCounts.Add(gemName, count); // Yüklenen sayacý sözlüðe ekle
         }
     }
 
@@ -48,23 +53,35 @@ public class PlayerController : MonoBehaviour
         if (GamCol.tag.StartsWith("Gem_"))
         {
             string gemTag = GamCol.tag; // Gem'in etiketi
-           
+
             if (gemCounts.ContainsKey(gemTag))
             {
                 gemCounts[gemTag]++; // Ýlgili sayacý bir artýr
                 Debug.Log("Gem Count for " + gemTag + ": " + gemCounts[gemTag]);
+                PlayerPrefs.SetInt(gemTag, gemCounts[gemTag]); // PlayerPrefs'e güncellenen sayacý kaydet
             }
         }
     }
+
 
     public static int GetGemCount(string gemTag)
     {
         if (gemCounts.ContainsKey(gemTag))
         {
+           
             return gemCounts[gemTag];
         }
 
         return 0; // Eðer belirtilen gemTag'e sahip bir sayaç yoksa 0 deðerini döndür
+    }
+    private void LoadGemCounts()
+    {
+        foreach (GemType gemType in GTM.gemTypes)
+        {
+            string gemName = gemType.gemName;
+            int count = PlayerPrefs.GetInt(gemName, 0); // Gem sayacýný PlayerPrefs'ten yükle, yoksa 0 olarak ayarla
+            gemCounts[gemName] = count; // Yüklenen sayacý güncelle
+        }
     }
 
 

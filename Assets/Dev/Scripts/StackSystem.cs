@@ -34,6 +34,7 @@ public class StackSystem : MonoBehaviour
         else if (other.CompareTag("Sales"))
         {
             targetObjects = GameObject.FindWithTag("Jeweler");
+
         }
     }
 
