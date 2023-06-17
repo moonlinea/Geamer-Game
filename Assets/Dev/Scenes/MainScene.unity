@@ -657,7 +657,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rowCount: 3
-  columnCount: 3
+  columnCount: 12
   tilePrefab: {fileID: 1908938331136116964, guid: 835fba7bee5cf0a47b018791bba053c1,
     type: 3}
   spawnArea: []
@@ -669,7 +669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245817038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.89, y: 0.05, z: -3.02}
+  m_LocalPosition: {x: -4.89, y: 0.05, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1253,7 +1253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865129712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.37999916, y: 1.7154164, z: 6.8199997}
+  m_LocalPosition: {x: 0.37999916, y: 1.7154164, z: 10.88}
   m_LocalScale: {x: 4.151676, y: 3.3530703, z: 3.0734496}
   m_ConstrainProportionsScale: 0
   m_Children:
