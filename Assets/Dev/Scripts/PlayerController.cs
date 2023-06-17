@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private static Dictionary<string, int> gemCounts; // Sayaçlarý tutmak için sözlük
 
-    public static GoldCounter TotalGold;
+  
 
     private void Start()
     {
