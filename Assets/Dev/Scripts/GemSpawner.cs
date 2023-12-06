@@ -7,14 +7,14 @@ public class GemSpawner : MonoBehaviour
     public GemTypeManager gemTypeManager;
     public Transform[] spawnArea;
     public int gemCount;
-    public float respawnDelay = 5f; // Yeniden spawn süresi
+    public float respawnDelay = 5f; 
 
     private void Start()
     {
         GridGenerator gridGenerator = FindObjectOfType<GridGenerator>();
         if (gridGenerator != null)
         {
-            spawnArea = gridGenerator.spawnArea;
+            spawnArea = gridGenerator.spawnArea; // GridGenerator'dan spawn alanlarýný al
             gemCount = spawnArea.Length;
 
             if (gemCount > spawnArea.Length)
@@ -23,10 +23,9 @@ public class GemSpawner : MonoBehaviour
                 return;
             }
 
-            SpawnGems();
-           
+            SpawnGems(); 
 
-            StartRespawnGems(); // Yeniden spawnlama iþlemini baþlat
+            StartRespawnGems(); 
         }
         else
         {
@@ -45,27 +44,27 @@ public class GemSpawner : MonoBehaviour
 
         for (int i = 0; i < gemCount; i++)
         {
-            GemType randomGemType = GetRandomGemType();
-            int randomIndex = GetRandomSpawnIndex(availableIndices);
-            Transform spawnTransform = spawnArea[randomIndex];
+            GemType randomGemType = GetRandomGemType(); // Rastgele bir Gem türü al
+            int randomIndex = GetRandomSpawnIndex(availableIndices); // Rastgele bir spawn alaný indeksi al
+            Transform spawnTransform = spawnArea[randomIndex]; // Rastgele spawn alanýnýn transformunu al
 
-            GameObject gemObject = Instantiate(randomGemType.model, spawnTransform.position, Quaternion.identity);
-            gemObject.tag = randomGemType.gemName;
+            GameObject gemObject = Instantiate(randomGemType.model, spawnTransform.position, Quaternion.identity); // Gem objesini spawn alanýna instantiate et
+            gemObject.tag = randomGemType.gemName; // Gem objesinin etiketini Gem türüne göre ayarla
 
-            availableIndices.Remove(randomIndex);
+            availableIndices.Remove(randomIndex); // Kullanýlan spawn alanýný listeden çýkar
         }
     }
 
     private GemType GetRandomGemType()
     {
-        int randomIndex = Random.Range(0, gemTypeManager.gemTypes.Count);
-        return gemTypeManager.gemTypes[randomIndex];
+        int randomIndex = Random.Range(0, gemTypeManager.gemTypes.Count); // Gem türlerinin sayýsý arasýnda rastgele bir indeks al
+        return gemTypeManager.gemTypes[randomIndex]; // Rastgele seçilen Gem türünü döndür
     }
 
     private int GetRandomSpawnIndex(List<int> availableIndices)
     {
-        int randomIndex = Random.Range(0, availableIndices.Count);
-        return availableIndices[randomIndex];
+        int randomIndex = Random.Range(0, availableIndices.Count); // Kullanýlabilir spawn alanlarý listesinin boyutu arasýnda rastgele bir indeks al
+        return availableIndices[randomIndex]; // Rastgele seçilen spawn alaný indeksini döndür
     }
 
     public bool IsGridEmpty(Transform gridTransform)
@@ -74,11 +73,11 @@ public class GemSpawner : MonoBehaviour
 
         foreach (Collider collider in colliders)
         {
-            if (collider.tag.StartsWith("Gem_")) // Eðer Gem etiketine sahip bir obje varsa, grid boþ deðildir
+            if (collider.tag.StartsWith("Gem_")) 
                 return false;
         }
 
-        return true; // Hiçbir Gem objesi yoksa, grid boþtur
+        return true; 
     }
 
     private IEnumerator RespawnGemsCoroutine()
@@ -87,11 +86,11 @@ public class GemSpawner : MonoBehaviour
 
         for (int i = 0; i < spawnArea.Length; i++)
         {
-            if (IsGridEmpty(spawnArea[i]))
+            if (IsGridEmpty(spawnArea[i])) // Eðer spawn alaný boþ ise
             {
-                GemType randomGemType = GetRandomGemType();
-                GameObject gemObject = Instantiate(randomGemType.model, spawnArea[i].position, Quaternion.identity);
-                gemObject.tag = randomGemType.gemName;
+                GemType randomGemType = GetRandomGemType(); // Rastgele bir Gem türü al
+                GameObject gemObject = Instantiate(randomGemType.model, spawnArea[i].position, Quaternion.identity); // Gem objesini spawn alanýna instantiate et
+                gemObject.tag = randomGemType.gemName; // Gem objesinin etiketini Gem türüne göre ayarla
             }
         }
 
@@ -103,4 +102,3 @@ public class GemSpawner : MonoBehaviour
         StartCoroutine(RespawnGemsCoroutine()); // Yeniden spawnlama coroutine'ini baþlat
     }
 }
-

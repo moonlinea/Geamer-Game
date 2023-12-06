@@ -22,7 +22,7 @@ public class GemTypeManager : MonoBehaviour
     }
 }
 
-[System.Serializable]
+[System.Serializable] 
 public class GemType
 {
     public string gemName;

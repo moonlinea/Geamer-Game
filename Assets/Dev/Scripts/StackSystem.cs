@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class StackSystem : MonoBehaviour
 {
-    private GameObject targetObjects; // Target objesini Inspector üzerinden atayýn
-    public float stackHeight = 5f; // Stack yüksekliði
+    private GameObject targetObjects; 
+    public float stackHeight = 5f; 
     private Transform gemTransform;
     private Vector3 _offset;
     private Transform gemPos;
@@ -13,12 +13,12 @@ public class StackSystem : MonoBehaviour
     public void Start()
     {
         gemTransform = this.transform;
-        targetObjects = GameObject.FindWithTag("Target");
+        targetObjects = GameObject.FindWithTag("Target"); 
     }
 
     public void Update()
     {
-        gemPos = targetObjects.transform;
+        gemPos = targetObjects.transform; 
         if (b == true)
         {
             Follow();
@@ -29,21 +29,20 @@ public class StackSystem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            b = true;
+            b = true; 
         }
         else if (other.CompareTag("Sales"))
         {
             targetObjects = GameObject.FindWithTag("Jeweler");
-
         }
     }
 
     private void Follow()
     {
-        float speed = 5f;
+        float speed = 5f; 
         float step = speed * Time.deltaTime;
 
-        Vector3 targetPosition = gemPos.position + _offset;
-        gemTransform.position = Vector3.MoveTowards(gemTransform.position, targetPosition, step);
+        Vector3 targetPosition = gemPos.position + _offset; // Takip edilecek hedef pozisyonu, offset ile ayarlanýr
+        gemTransform.position = Vector3.MoveTowards(gemTransform.position, targetPosition, step); // Hedefe doðru hareket et
     }
 }

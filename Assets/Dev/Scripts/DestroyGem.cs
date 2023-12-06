@@ -9,44 +9,43 @@ public class DestroyGem : MonoBehaviour
 
     private void Start()
     {
-        gemTypeManager = FindObjectOfType<GemTypeManager>();
+        gemTypeManager = FindObjectOfType<GemTypeManager>();    
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)//Satýþ yerine geldiðinde süreye göre yok etme ve satýlan gemlerin gold karþýlýðýný hesaplama
     {
-        if (other.tag.StartsWith("Gem_"))
+        if (other.tag.StartsWith("Gem_"))   
         {
-            GemType gemType = GetGemTypeByTag(other.tag);
-            if (gemType != null)
+            GemType gemType = GetGemTypeByTag(other.tag);   
+            if (gemType != null) 
             {
-                float startingPrice = gemType.startingPrice;
-                TotalGold += startingPrice;
+                float startingPrice = gemType.startingPrice;   
+                TotalGold += startingPrice;   
 
                 Debug.Log("Total Gold=" + TotalGold);
-                Debug.Log(other.tag+" Gem Starting Price: " + startingPrice);
+                Debug.Log(other.tag + " Gem Starting Price: " + startingPrice);
             }
 
-            StartCoroutine(DestroyAfterDelay(other.gameObject, 3f)); // 3 saniye sonra nesneyi yok etmek için IEnumerator'u baþlat
+            StartCoroutine(DestroyAfterDelay(other.gameObject, 3f));    // 3 saniye sonra nesneyi yok etmek için IEnumerator'u baþlat
         }
     }
 
     private IEnumerator DestroyAfterDelay(GameObject obj, float delay)
     {
-        yield return new WaitForSeconds(delay); // Belirtilen süre kadar bekle
+        yield return new WaitForSeconds(delay);   
 
-        Destroy(obj); // Nesneyi yok et
+        Destroy(obj);  
     }
-
 
     private GemType GetGemTypeByTag(string tag)
     {
-        foreach (GemType gemType in gemTypeManager.gemTypes)
+        foreach (GemType gemType in gemTypeManager.gemTypes)    // GemTypeManager'daki gemTypes listesinde gezin
         {
-            if (gemType.gemName == tag)
+            if (gemType.gemName == tag)    // Eðer GemType'ýn gemName özelliði etikete eþitse
             {
-                return gemType;
+                return gemType;    // GemType'ý döndür
             }
         }
-        return null;
+        return null;    // GemType bulunamazsa null döndür
     }
 }

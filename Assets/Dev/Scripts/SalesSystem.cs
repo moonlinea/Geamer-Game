@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+
 public class SalesSystem : MonoBehaviour
 {
     private GemTypeManager gemTypeManager;
     private float TotalGold;
-    public TMP_Text  _totalGoldText;
-   
+    public TMP_Text _totalGoldText;
+
     private void Start()
     {
         gemTypeManager = FindObjectOfType<GemTypeManager>();
-        _totalGoldText.text =""+PlayerPrefs.GetFloat("TotalGold",TotalGold);
-      
+        _totalGoldText.text = "" + PlayerPrefs.GetFloat("TotalGold", TotalGold);
+
+        // Baþlangýçta kaydedilen toplam altýn miktarýný alýp _totalGoldText'e atýyoruz
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,7 +29,7 @@ public class SalesSystem : MonoBehaviour
                 TotalGold += startingPrice;
 
                 Debug.Log("Total Gold=" + TotalGold);
-                _totalGoldText.text =""+TotalGold;
+                _totalGoldText.text = "" + TotalGold;
                 PlayerPrefs.SetFloat("TotalGold", TotalGold);
                 Debug.Log(other.tag + " Gem Starting Price: " + startingPrice);
             }
