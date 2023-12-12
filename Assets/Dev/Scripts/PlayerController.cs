@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
             if (gemCounts.ContainsKey(gemTag))
             {
                 gemCounts[gemTag]++; // Ýlgili sayacý bir artýr
-                Debug.Log("Gem Count for " + gemTag + ": " + gemCounts[gemTag]);
+                Debug.Log("Gem Count for " + gemTag + ":" + gemCounts[gemTag]);
                 PlayerPrefs.SetInt(gemTag, gemCounts[gemTag]); // PlayerPrefs'e güncellenen sayacý kaydet
             }
         }

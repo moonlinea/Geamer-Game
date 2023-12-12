@@ -9,12 +9,24 @@ public class SalesSystem : MonoBehaviour
     private GemTypeManager gemTypeManager;
     private float TotalGold;
     public TMP_Text _totalGoldText;
+    bool firstGold = true;
 
     private void Start()
     {
-        gemTypeManager = FindObjectOfType<GemTypeManager>();
-        _totalGoldText.text = "" + PlayerPrefs.GetFloat("TotalGold", TotalGold);
 
+        gemTypeManager = FindObjectOfType<GemTypeManager>();
+
+        if (firstGold = false)
+        {
+            _totalGoldText.text = "" + PlayerPrefs.GetFloat("TotalGold", TotalGold);
+
+
+        }
+        else
+        {
+            firstGold = false;
+            PlayerPrefs.SetFloat("TotalGold", 0);
+        }
         // Baþlangýçta kaydedilen toplam altýn miktarýný alýp _totalGoldText'e atýyoruz
     }
 
