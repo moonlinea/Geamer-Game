@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody; 
     [SerializeField] private FixedJoystick _joystick; 
@@ -16,7 +17,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        GTM = FindObjectOfType<GemTypeManager>(); 
+        GTM = FindObjectOfType<GemTypeManager>();
+        _joystick = FindObjectOfType<FixedJoystick>();
         InitializeGemCounts(); 
         LoadGemCounts();
     }
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
         // Joystick ile karakter kontrolü
         if (_joystick.Horizontal != 0 || _joystick.Vertical != 0)
         {
@@ -60,7 +63,6 @@ public class PlayerController : MonoBehaviour
             if (gemCounts.ContainsKey(gemTag))
             {
                 gemCounts[gemTag]++; // Ýlgili sayacý bir artýr
-                Debug.Log("Gem Count for " + gemTag + ":" + gemCounts[gemTag]);
                 PlayerPrefs.SetInt(gemTag, gemCounts[gemTag]); // PlayerPrefs'e güncellenen sayacý kaydet
             }
         }

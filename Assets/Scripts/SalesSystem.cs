@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class SalesSystem : MonoBehaviour
+public class SalesSystem : NetworkBehaviour
 {
     private GemTypeManager gemTypeManager;
     private float TotalGold;
@@ -16,7 +17,7 @@ public class SalesSystem : MonoBehaviour
 
         gemTypeManager = FindObjectOfType<GemTypeManager>();
 
-        if (firstGold = false)
+        if (firstGold == false)
         {
             _totalGoldText.text = "" + PlayerPrefs.GetFloat("TotalGold", TotalGold);
 
